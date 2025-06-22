@@ -11,9 +11,9 @@ const app = express();
 app.use(helmet()); // Security middleware to set various HTTP headers
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(morgan("dev")); // HTTP request logger middleware
-app.use(cors(
-    { origin: process.env.CORS_ORIGIN, }
-));
+// app.use(cors(
+//     { origin: process.env.CORS_ORIGIN, }
+// ));
 
 // Define a rota de upload, encadeando o middleware do Multer com o controlador
 app.post("/upload", uploadMiddleware, uploadController); // <-- ALTERADO AQUI
