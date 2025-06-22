@@ -7,12 +7,18 @@ import { URL, fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Em produção vamos pegar outro diretório para usar na hospedagem Vercel
+const isProduction = process.env.NODE_ENV === 'production';
+
 // --- Configurações de diretório temporário para o Multer ---
-const UPLOAD_TEMP_DIR = path.resolve(__dirname, 'tempUploads');
+const UPLOAD_TEMP_DIR = 
+    (isProduction)
+    ? '/tmp' // ambiente serverless da Vercel
+    : path.resolve(__dirname, 'tempUploads');
 
 // Garante que o diretório temporário exista
-if (!fs.existsSync(UPLOAD_TEMP_DIR)) {
-    fs.mkdirSync(UPLOAD_TEMP_DIR, { recursive: true });
+if (!isProduction && !fs.existsSync(UPLOAD_TEMP_DIR)) {
+  fs.mkdirSync(UPLOAD_TEMP_DIR, { recursive: true });
 }
 
 // Configuração do Multer para armazenamento de arquivos em disco
