@@ -1,6 +1,6 @@
 // api/index.js
-const serverless = require('serverless-http');
+import serverless from 'serverless-http';
 
-const app = require('../src/app'); // reaproveita a configuração do Express
+import app from '../src/app.js'; // reaproveita a configuração do Express
 
 module.exports.handler = serverless(app);
