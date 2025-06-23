@@ -6,7 +6,7 @@ import morgan from "morgan";
 // Importa a instância do Multer e a função controladora
 import { uploadMiddleware, uploadController } from "./upload.js"; // <-- ALTERADO AQUI
 
-const allowedOrigins = process.env.CORS_ORIGINS.split(',');
+const allowedOrigins = (process.env.CORS_ORIGINS || '').split(',').filter(Boolean);
 
 const app = express();
 
