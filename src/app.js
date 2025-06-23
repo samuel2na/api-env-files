@@ -26,6 +26,13 @@ app.use(cors({
 // Define a rota de upload, encadeando o middleware do Multer com o controlador
 app.post("/upload", uploadMiddleware, uploadController); // <-- ALTERADO AQUI
 
+app.get('/debug-env', (req, res) => {
+  res.send({
+    CORS_ORIGINS: process.env.CORS_ORIGINS,
+    NODE_ENV: process.env.NODE_ENV
+  });
+});
+
 // Rota de teste
 app.use("/", (req, res, next) => {
     res.send("Hello World - test start !");
